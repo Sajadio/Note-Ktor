@@ -2,10 +2,13 @@ package com.example.plugins
 
 import com.example.di.appModule
 import com.example.repository.auth.AuthRepository
+import com.example.repository.note.NoteRepository
 import com.example.routes.auth.login
 import com.example.routes.auth.signUp
+import com.example.routes.note.addNote
 import io.ktor.server.routing.*
 import io.ktor.server.application.*
+import io.ktor.server.auth.*
 import org.koin.ktor.ext.inject
 import org.koin.ktor.plugin.Koin
 
@@ -14,8 +17,15 @@ fun Application.configureRouting() {
         modules(appModule)
     }
     routing {
-        val repository by inject<AuthRepository>()
-        signUp(repository)
-        login(repository)
+        val authRepo by inject<AuthRepository>()
+        signUp(authRepo)
+        login(authRepo)
+
+        val noteRepo by inject<NoteRepository>()
+        route("user") {
+            authenticate("auth-user") {
+                addNote(noteRepo)
+            }
+        }
     }
 }

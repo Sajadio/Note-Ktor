@@ -19,6 +19,10 @@ const val MESSAGE_ADMIN_ID = "This admin is not exist"
 const val ADMIN_REGISTRATION_SUCCESS = "Admin successfully registered"
 const val ADMIN_LOGIN_SUCCESS = "Admin successfully logged in"
 
+// for note
+const val MESSAGE_NOTE_NAME = "This note is not exist"
+const val ACCESS_NOTE = "You don't have access for this note"
+
 const val SUCCESS = "Success"
 const val ERROR = "error"
 const val OK = "ok"

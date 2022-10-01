@@ -1,6 +1,7 @@
 package com.example.data.database
 
 import com.example.data.database.table.AdminTable
+import com.example.data.database.table.NoteTable
 import com.example.data.database.table.UserTable
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
@@ -17,6 +18,7 @@ object DatabaseFactory {
         transaction {
             SchemaUtils.create(UserTable)
             SchemaUtils.create(AdminTable)
+            SchemaUtils.create(NoteTable)
         }
     }
 

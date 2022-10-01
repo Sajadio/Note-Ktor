@@ -1,5 +1,6 @@
 package com.example
 
+import com.example.data.database.table.DatabaseFactory
 import io.ktor.server.application.*
 import com.example.plugins.*
 
@@ -8,6 +9,9 @@ fun main(args: Array<String>): Unit =
 
 @Suppress("unused")
 fun Application.module() {
+
+    DatabaseFactory.init()
+
     configureSerialization()
     configureStatusPage()
     configureMonitoring()

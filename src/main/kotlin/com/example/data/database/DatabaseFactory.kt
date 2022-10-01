@@ -1,5 +1,6 @@
 package com.example.data.database
 
+import com.example.data.database.table.AdminTable
 import com.example.data.database.table.UserTable
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
@@ -15,6 +16,7 @@ object DatabaseFactory {
         Database.connect(hikari())
         transaction {
             SchemaUtils.create(UserTable)
+            SchemaUtils.create(AdminTable)
         }
     }
 

@@ -1,21 +1,21 @@
 package com.example.domain.model
 
 
-data class UserDto(
-    val userId: Int = 0,
+data class AdminDto(
+    val adminId: Int = 0,
     val fullName: String? = null,
     val email: String? = null,
     val password: String? = null,
     val createdAt: String = ""
 )
 
-data class NewUser(
+data class NewAdmin(
     val fullName: String,
     val email: String,
     val password: String,
 )
 
-data class UserCredentials(
+data class AdminCredentials(
     val email: String,
     val password: String,
 )

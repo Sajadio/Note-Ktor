@@ -8,9 +8,7 @@ object UserBodyMapper : Mapper<UserDto, User> {
         return User(
             userId = input.userId,
             fullName = input.fullName,
-            urlPhoto = input.urlPhoto,
             email = input.email,
-            phoneNumber = input.phoneNumber,
             createdAt = input.createdAt
         )
     }

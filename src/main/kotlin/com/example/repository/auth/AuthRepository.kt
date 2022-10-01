@@ -8,7 +8,7 @@ interface AuthRepository {
     suspend fun userLogIn(userCredentials: UserCredentials): Response<Any>
     suspend fun findUserByEmail(email: String): UserDto?
 
-//    suspend fun adminSignUp(newAdmin: NewAdmin): Response<Any>
-//    suspend fun adminLogIn(adminCredentials: AdminCredentials): Response<Any>
-//    suspend fun findAdminByEmail(email: String): AdminDto?
+    suspend fun adminSignUp(newAdmin: NewAdmin): Response<Any>
+    suspend fun adminLogIn(adminCredentials: AdminCredentials): Response<Any>
+    suspend fun findAdminByEmail(email: String): AdminDto?
 }

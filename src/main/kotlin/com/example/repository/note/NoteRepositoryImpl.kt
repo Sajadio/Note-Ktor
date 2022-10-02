@@ -34,17 +34,20 @@ class NoteRepositoryImpl(
         )
     }
 
-    override suspend fun getNoteByTitle(title: String) =
-        noteService.getNoteByTitle(title)?.let { note ->
+    override suspend fun getNoteByTitle(title: String): Response<Any> {
+        val result = noteService.getNoteByTitle(title)
+        return if (result.isNotEmpty()) {
             checkResponseStatus(
                 message = SUCCESS,
                 statusCode = HttpStatusCode.OK,
-                data = note
+                data = result
             )
-        } ?: checkResponseStatus(
-            message = EMPTY_RESULT,
-            statusCode = HttpStatusCode.NotFound
-        )
+        } else
+            checkResponseStatus(
+                message = EMPTY_RESULT,
+                statusCode = HttpStatusCode.NotFound
+            )
+    }
 
     override suspend fun getNoteById(noteId: Int) =
         noteService.getNoteById(noteId)?.let { note ->

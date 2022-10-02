@@ -11,6 +11,14 @@ data class NoteResponse(
 )
 
 @Serializable
+data class NotesResponse(
+    val status: String,
+    val message: String? = null,
+    val totalResults: Int,
+    val notes: List<Note>? = null
+)
+
+@Serializable
 data class Note(
     val noteId: Int = 0,
     val userId: Int = 0,

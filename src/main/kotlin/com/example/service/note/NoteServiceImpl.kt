@@ -24,10 +24,8 @@ class NoteServiceImpl : NoteService {
 
     override suspend fun getNoteByTitle(title: String) = DatabaseFactory.dbQuery {
         NoteTable.select {
-            NoteTable.title eq title
-        }.map { result ->
-            result.toNoteDto()
-        }.singleOrNull()
+            NoteTable.title like title or (NoteTable.title eq title)
+        }.toList()
     }
 
 

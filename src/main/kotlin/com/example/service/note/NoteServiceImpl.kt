@@ -57,4 +57,10 @@ class NoteServiceImpl : NoteService {
             it[description] = noteDto.description
         }
     } > 0
+
+    override suspend fun checkIdNoteIsExist(noteId: Int) = DatabaseFactory.dbQuery {
+        NoteTable.select {
+            NoteTable.noteId eq noteId
+        }.empty()
+    }
 }

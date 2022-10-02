@@ -11,4 +11,6 @@ interface NoteRepository {
     suspend fun deleteNoteById(noteId: Int): Response<Any>
     suspend fun deleteAllNotes(): Response<Any>
     suspend fun updateNote(noteDto: NoteDto): Response<Any>
+    suspend fun checkIdNoteIsExist(noteId: Int): Boolean
+
 }

@@ -90,4 +90,6 @@ class NoteRepositoryImpl(
             message = ERROR,
             statusCode = HttpStatusCode.BadRequest,
         )
+
+    override suspend fun checkIdNoteIsExist(noteId: Int) = noteService.checkIdNoteIsExist(noteId)
 }

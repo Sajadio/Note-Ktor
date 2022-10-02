@@ -6,6 +6,9 @@ import com.example.repository.note.NoteRepository
 import com.example.routes.auth.login
 import com.example.routes.auth.signUp
 import com.example.routes.note.addNote
+import com.example.routes.note.deleteNote
+import com.example.routes.note.getNoteDetails
+import com.example.routes.note.updateNote
 import io.ktor.server.routing.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
@@ -25,6 +28,9 @@ fun Application.configureRouting() {
         route("user") {
             authenticate("auth-user") {
                 addNote(noteRepo)
+                updateNote(noteRepo)
+                getNoteDetails(noteRepo)
+                deleteNote(noteRepo)
             }
         }
     }

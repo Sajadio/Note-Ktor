@@ -10,4 +10,5 @@ interface NoteService {
     suspend fun deleteNoteById(noteId: Int): Boolean
     suspend fun deleteAllNotes(): Boolean
     suspend fun updateNote(noteDto: NoteDto): Boolean
+    suspend fun checkIdNoteIsExist(noteId: Int): Boolean
 }

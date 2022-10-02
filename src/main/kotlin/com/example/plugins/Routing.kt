@@ -25,10 +25,12 @@ fun Application.configureRouting() {
         route("user") {
             authenticate("auth-user") {
                 addNote(noteRepo)
-                updateNote(noteRepo)
+                getAllNotes(noteRepo)
                 getNoteDetails(noteRepo)
                 getNoteByTitle(noteRepo)
                 deleteNote(noteRepo)
+                deleteAllNote(noteRepo)
+                updateNote(noteRepo)
             }
         }
     }

@@ -4,6 +4,7 @@ import com.example.data.database.table.toNoteDto
 import com.example.data.mapper.NotesBodyMapper
 import com.example.domain.response.NotesResponse
 import com.example.repository.note.NoteRepository
+import com.example.routes.userId
 import com.example.utils.ERROR
 import com.example.utils.OK
 import com.example.utils.Response
@@ -28,7 +29,7 @@ fun Route.getNoteByTitle(repository: NoteRepository) {
                 )
                 return@get
             }
-            when (val result = repository.getNoteByTitle(noteTitle)) {
+            when (val result = repository.getNoteByTitle(noteTitle,call.userId.toInt())) {
                 is Response.SuccessResponse -> {
                     val noteDto = (result.data as List<ResultRow>).map {
                         it.toNoteDto()!!

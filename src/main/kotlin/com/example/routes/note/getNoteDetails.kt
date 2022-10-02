@@ -4,6 +4,7 @@ import com.example.data.mapper.NoteBodyMapper
 import com.example.domain.model.NoteDto
 import com.example.domain.response.NoteResponse
 import com.example.repository.note.NoteRepository
+import com.example.routes.userId
 import com.example.utils.*
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -34,7 +35,7 @@ fun Route.getNoteDetails(repository: NoteRepository) {
                 return@get
             }
 
-            when (val result = repository.getNoteById(noteId)) {
+            when (val result = repository.getNoteById(noteId,call.userId.toInt())) {
                 is Response.SuccessResponse -> {
                     val noteDto = result.data as NoteDto
                     val note = NoteBodyMapper.mapTo(noteDto)

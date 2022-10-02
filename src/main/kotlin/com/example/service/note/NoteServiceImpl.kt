@@ -4,6 +4,7 @@ import com.example.data.database.DatabaseFactory
 import com.example.data.database.table.NoteTable
 import com.example.data.database.table.toNoteDto
 import com.example.domain.model.NoteDto
+import com.example.domain.model.NoteParams
 import org.jetbrains.exposed.sql.*
 
 class NoteServiceImpl : NoteService {
@@ -16,36 +17,48 @@ class NoteServiceImpl : NoteService {
         }.insertedCount > 0
     }
 
-    override suspend fun getAllNotes() = DatabaseFactory.dbQuery {
-        NoteTable.selectAll().map { result ->
+    override suspend fun getAllNotes(userId: Int) = DatabaseFactory.dbQuery {
+        NoteTable.selectAll().andWhere {
+            NoteTable.userId eq userId
+        }.map { result ->
             result.toNoteDto()
         }
     }
 
-    override suspend fun getNoteByTitle(title: String) = DatabaseFactory.dbQuery {
+    override suspend fun getNoteByTitle(title: String,userId: Int) = DatabaseFactory.dbQuery {
         NoteTable.select {
-            NoteTable.title like title or (NoteTable.title eq title)
+            NoteTable.userId eq userId and (NoteTable.title like title)
         }.toList()
     }
 
 
-    override suspend fun getNoteById(noteId: Int) = DatabaseFactory.dbQuery {
+    override suspend fun getNoteById(noteId: Int,userId: Int) = DatabaseFactory.dbQuery {
         NoteTable.select {
-            NoteTable.noteId eq noteId
+            NoteTable.userId eq userId and
+                    (NoteTable.noteId eq noteId)
         }.map { result ->
             result.toNoteDto()
         }.singleOrNull()
     }
 
-    override suspend fun deleteNoteById(noteId: Int) = DatabaseFactory.dbQuery {
-        NoteTable.deleteWhere { NoteTable.noteId eq noteId } > 0
+    override suspend fun deleteNoteById(noteId: Int, userId: Int) = DatabaseFactory.dbQuery {
+        NoteTable.deleteWhere {
+            NoteTable.userId eq userId and (NoteTable.noteId eq noteId)
+        } > 0
     }
 
 
-    override suspend fun deleteAllNotes() = DatabaseFactory.dbQuery {
-        NoteTable.deleteAll() > 0
+    override suspend fun deleteAllNotes(noteParams: NoteParams): Boolean {
+        var result = 0
+        DatabaseFactory.dbQuery {
+            noteParams.notesId.forEach { id ->
+                result = NoteTable.deleteWhere {
+                    NoteTable.userId eq noteParams.userId and (NoteTable.noteId eq id)
+                }
+            }
+        }
+        return result > 0
     }
-
 
     override suspend fun updateNote(noteDto: NoteDto) = DatabaseFactory.dbQuery {
         NoteTable.update({

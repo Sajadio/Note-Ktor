@@ -2,6 +2,7 @@ package com.example.routes.note
 
 import com.example.domain.response.NoteResponse
 import com.example.repository.note.NoteRepository
+import com.example.routes.userId
 import com.example.utils.ERROR
 import com.example.utils.MESSAGE_NOTE_NAME
 import com.example.utils.OK
@@ -15,7 +16,6 @@ fun Route.deleteNote(repository: NoteRepository) {
     get("note/delete") {
         try {
             val noteId = call.request.queryParameters["noteId"]?.toIntOrNull()
-
             if (noteId == null) {
                 call.respond(
                     HttpStatusCode.BadRequest, NoteResponse(
@@ -35,7 +35,7 @@ fun Route.deleteNote(repository: NoteRepository) {
                 return@get
             }
 
-            when (val result = repository.deleteNoteById(noteId)) {
+            when (val result = repository.deleteNoteById(noteId,call.userId.toInt())) {
                 is Response.SuccessResponse -> {
                     call.respond(
                         result.statusCode, NoteResponse(

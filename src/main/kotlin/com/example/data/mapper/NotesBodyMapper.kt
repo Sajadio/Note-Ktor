@@ -14,6 +14,7 @@ object NotesBodyMapper : Mapper<List<NoteDto>, List<Note>> {
                     userId = it.userId,
                     title = it.title,
                     description = it.description,
+                    color = it.color,
                     createdAt = it.createdAt,
                 )
             )

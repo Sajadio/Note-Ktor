@@ -25,14 +25,14 @@ class NoteServiceImpl : NoteService {
         }
     }
 
-    override suspend fun getNoteByTitle(title: String,userId: Int) = DatabaseFactory.dbQuery {
+    override suspend fun getNoteByTitle(title: String, userId: Int) = DatabaseFactory.dbQuery {
         NoteTable.select {
             NoteTable.userId eq userId and (NoteTable.title like title)
         }.toList()
     }
 
 
-    override suspend fun getNoteById(noteId: Int,userId: Int) = DatabaseFactory.dbQuery {
+    override suspend fun getNoteById(noteId: Int, userId: Int) = DatabaseFactory.dbQuery {
         NoteTable.select {
             NoteTable.userId eq userId and
                     (NoteTable.noteId eq noteId)

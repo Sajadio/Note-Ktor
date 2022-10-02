@@ -10,6 +10,7 @@ object NoteBodyMapper : Mapper<NoteDto, Note> {
         userId = input.userId,
         title = input.title,
         description = input.description,
+        color = input.color,
         createdAt = input.createdAt,
     )
 }

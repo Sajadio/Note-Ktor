@@ -11,7 +11,7 @@ data class AdminResponse(
 )
 
 @Serializable
-data class UsersResponse(
+data class AdminsResponse(
     val status: String,
     val message: String? = null,
     val users: List<User>? = null
@@ -21,8 +21,6 @@ data class UsersResponse(
 data class Admin(
     val adminId: Int = 0,
     val fullName: String? = null,
-    val urlPhoto: String? = null,
     val email: String? = null,
-    val phoneNumber: String? = null,
     val createdAt: String = ""
 )

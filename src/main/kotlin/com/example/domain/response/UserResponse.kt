@@ -14,9 +14,6 @@ data class UserResponse(
 data class User(
     val userId: Int = 0,
     val fullName: String? = null,
-    val urlPhoto: String? = null,
     val email: String? = null,
-    val phoneNumber: String? = null,
-    val doHaveLibrary: Boolean = false,
     val createdAt: String = ""
 )
